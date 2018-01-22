@@ -55,6 +55,7 @@ class RoverState():
         self.mode = 'forward' # Current mode (can be forward or stop)
         self.throttle_set = 0.2 # Throttle setting when accelerating
         self.brake_set = 10 # Brake setting when braking
+        self.consec_stop_frames = 0
         # The stop_forward and go_forward fields below represent total count
         # of navigable terrain pixels.  This is a very crude form of knowing
         # when you can keep going and when you should stop.  Feel free to
@@ -66,6 +67,8 @@ class RoverState():
         # Update this image to display your intermediate analysis steps
         # on screen in autonomous mode
         self.vision_image = np.zeros((160, 320, 3), dtype=np.float) 
+
+        self.slow_samples = 0
         # Worldmap
         # Update this image with the positions of navigable terrain
         # obstacles and rock samples
