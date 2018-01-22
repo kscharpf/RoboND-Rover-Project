@@ -49,19 +49,23 @@ You're reading it!
 #### 1. Run the functions provided in the notebook on test images (first with the test data provided, next on data you have recorded). Add/modify functions to allow for color selection of obstacles and rock samples.
 
 Example grid and example rock images:
+
 ![alt text][image2]
 
 ![alt text][image3]
 
 Warped perspective of the two example images:
+
 ![alt text][image4]
 
 ![alt text][image5]
 
 I used the field of view masking technique provided in the project overview video rather than simply negating the navigable terrain. The masked field of view looks identical regardless of source image.
+
 ![alt text][image6]
 
 To identify the navigable terrain versus obstacles versus rocks, I updated the color_thresh function provided during the classwork to take a range of RGB values rather than a single low threshold. The identification of an obstacle is those areas within the FOV mask that are identified as not navigable. For the samples, there is a low amount of blue present in pixels for the samples. Here are the navigable terrain, obstacles, and rock for the example_grid file provided:
+
 ![alt text][image7]
 
 ![alt text][image8]
