@@ -3,7 +3,7 @@
 [![Udacity - Robotics NanoDegree Program](https://s3-us-west-1.amazonaws.com/udacity-robotics/Extra+Images/RoboND_flag.png)](https://www.udacity.com/robotics)
 # Search and Sample Return Project
 
-[a relative link][rover_writeup.md]
+[Link to Project Results](rover_writeup.md)
 
 ![alt text][image_0] 
 
