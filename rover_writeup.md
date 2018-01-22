@@ -50,10 +50,12 @@ You're reading it!
 
 Example grid and example rock images:
 ![alt text][image2]
+
 ![alt text][image3]
 
 Warped perspective of the two example images:
 ![alt text][image4]
+
 ![alt text][image5]
 
 I used the field of view masking technique provided in the project overview video rather than simply negating the navigable terrain. The masked field of view looks identical regardless of source image.
@@ -61,14 +63,20 @@ I used the field of view masking technique provided in the project overview vide
 
 To identify the navigable terrain versus obstacles versus rocks, I updated the color_thresh function provided during the classwork to take a range of RGB values rather than a single low threshold. The identification of an obstacle is those areas within the FOV mask that are identified as not navigable. For the samples, there is a low amount of blue present in pixels for the samples. Here are the navigable terrain, obstacles, and rock for the example_grid file provided:
 ![alt text][image7]
+
 ![alt text][image8]
+
 ![alt text][image9]
+
 
 There is no rock in the example_grid image so the all-black presentation is as expected. Now here are the images produced for navigable, obstacles, and rock for example_rock image:
 
 ![alt text][image10]
+
 ![alt text][image11]
+
 ![alt text][image12]
+
 
 Here you see the small blip of white indicating pixels that passed the rock samples filter in the bottom center of the image.
 
@@ -93,21 +101,22 @@ Finally, I noted that even with the changes to prevent the rover from getting st
 
 I executed my tests using the "Good" graphics quality and 1024x768 resolution and 14FPS. My platform is Ubuntu 17.10 on a Dell XPS13 with the Core I7 processor. Here are the results at different timesteps:
 
-Time: Collected/Located Mapped Fidelity
-60s: 0/0 13% 55%
-120s: 0/0 18% 55%
-180s: 0/0 18% 55%
-240s: 0/0 45% 64%
-300s: 1/1 47% 63%
-360s: 1/1 58% 66%
-420s: 1/1 61% 65%
-480s: 1/1 68% 66%
-540s: 1/2 78% 68%
-600s: 1/2 80% 66%
-660s: 1/4 94% 67%
-720s: 2/4 95% 66%
-780s: 2/5 96% 66%
-840s: 2/5 96% 65%
-900s: 2/5 96% 65% (simulation terminated)
-
+| Time        | Located           | Collected  | Mapped | Fidelity |
+| ------------- |:-------------:| -----:| ----------:| ----------:|
+| 60s         | 0 | 0 | 13% | 55% |
+| 120s | 0 | 0 | 18% | 55% |
+| 180s | 0 | 0 | 18% | 55% |
+| 240s | 0 | 0 | 45% | 64% |
+| 300s | 1 | 1 | 47% | 63% |
+| 360s | 1 | 1 | 58% | 66% |
+| 420s | 1 | 1 | 61% | 65% |
+| 480s | 1 | 1 | 68% | 66% |
+| 540s | 2 | 1 | 78% | 68% |
+| 600s | 2 | 1 | 80% | 66% |
+| 660s | 4 | 1 | 94% | 67% |
+| 720s | 4 | 2 | 95% | 66% |
+| 780s | 5 | 2 | 96% | 66% |
+| 840s | 5 | 2 | 96% | 65% |
+| 900s | 5 | 2 | 96% | 65% |
+ 
 There are several areas for improvement here. The most obvious is that between 60s and 180s there was only 5% additional terrain mapped. The reason was that the particular start location resulted in a loop through an open area. Any logic that takes into account history and unexplored areas would do better. A similar problem happens after 720s. At that time, there are two objects at different places in the canyon and the approach logic fails to collect the objects each time. A better approach logic or if the rover had some memory that it was going after a sample would do better. Finally, I did not attempt to add in the necessary logic for the rover to return to the start to deliver the supplies.
