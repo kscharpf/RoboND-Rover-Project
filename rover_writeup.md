@@ -33,6 +33,9 @@
 [image10]: ./output/example_rock_ground.jpg
 [image11]: ./output/example_rock_obstacles.jpg
 [image12]: ./output/example_rock_samples.jpg
+[image13]: ./output/roversim_0124_1.png
+[image14]: ./output/roversim_0124_2_5min.png
+[image15]: ./output/roversim_0124_2_10min.png
 
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/916/view) Points
@@ -64,7 +67,7 @@ I used the field of view masking technique provided in the project overview vide
 
 ![alt text][image6]
 
-To identify the navigable terrain versus obstacles versus rocks, I updated the color_thresh function provided during the classwork to take a range of RGB values rather than a single low threshold. The identification of an obstacle is those areas within the FOV mask that are identified as not navigable. For the samples, there is a low amount of blue present in pixels for the samples. Here are the navigable terrain, obstacles, and rock for the example_grid file provided:
+To identify the navigable terrain versus obstacles versus rocks, I updated the color_thresh function provided during the classwork to take a range of RGB values rather than a single low threshold. For the ground terrain, the RGB range is from (160,160,160) to (255,255,255). The identification of an obstacle is those areas within the FOV mask that are identified as not navigable. For the samples, there is a low amount of blue present in pixels for the samples. For the rock samples, the RGB range is from (110,110,0) to (200,200,60). Here are the navigable terrain, obstacles, and rock for the example_grid file provided:
 
 ![alt text][image7]
 
@@ -103,24 +106,14 @@ Finally, I noted that even with the changes to prevent the rover from getting st
 
 **Note: running the simulator with different choices of resolution and graphics quality may produce different results, particularly on different machines!  Make a note of your simulator settings (resolution and graphics quality set on launch) and frames per second (FPS output to terminal by `drive_rover.py`) in your writeup when you submit the project so your reviewer can reproduce your results.**
 
-I executed my tests using the "Good" graphics quality and 1024x768 resolution and 14FPS. My platform is Ubuntu 17.10 on a Dell XPS13 with the Core I7 processor. Here are the results at different timesteps:
+I executed my tests using the "Good" graphics quality and 1024x768 resolution and 14FPS. My platform is Ubuntu 17.10 on a Dell XPS13 with the Core I7 processor. The first run is illustrated in the figure below. Here after 15 minutes of runtime, the rover has achieved 77% mapping at 67% fidelity and has located and collected 4 samples.
 
-| Time        | Located           | Collected  | Mapped | Fidelity |
-| ------------- |:-------------:| -----:| ----------:| ----------:|
-| 60s         | 0 | 0 | 13% | 55% |
-| 120s | 0 | 0 | 18% | 55% |
-| 180s | 0 | 0 | 18% | 55% |
-| 240s | 0 | 0 | 45% | 64% |
-| 300s | 1 | 1 | 47% | 63% |
-| 360s | 1 | 1 | 58% | 66% |
-| 420s | 1 | 1 | 61% | 65% |
-| 480s | 1 | 1 | 68% | 66% |
-| 540s | 2 | 1 | 78% | 68% |
-| 600s | 2 | 1 | 80% | 66% |
-| 660s | 4 | 1 | 94% | 67% |
-| 720s | 4 | 2 | 95% | 66% |
-| 780s | 5 | 2 | 96% | 66% |
-| 840s | 5 | 2 | 96% | 65% |
-| 900s | 5 | 2 | 96% | 65% |
+![alt text][image13]
+
+The next test shows screen captures at the 5 minute and 10 minute intervals to illustrate how the rover progresses:
+
+![alt text][image14]
+
+![alt text][image15]
  
-There are several areas for improvement here. The most obvious is that between 60s and 180s there was only 5% additional terrain mapped. The reason was that the particular start location resulted in a loop through an open area. Any logic that takes into account history and unexplored areas would do better. A similar problem happens after 720s. At that time, there are two objects at different places in the canyon and the approach logic fails to collect the objects each time. A better approach logic or if the rover had some memory that it was going after a sample would do better. Finally, I did not attempt to add in the necessary logic for the rover to return to the start to deliver the supplies.
+There are several areas for improvement here. The terrain exploration is rather slow. In some start locations where the terrain is wide open, the rover can find itself in a wide circle. I have tried to mitigate this issue somewhat by introducing some randomness into the steering. When searching an unexplored canyon and encountering a rock, the rover may end up turning around after having retrieved the rock rather than continuing to explore the canyon. This is due to the rover not really having a concept of exploring unknown territory. In some cases, the rover approaches the rock but fails to retrieve it because the logic results in the rover either unable to achieve sufficient velocity to pick up the rock, for example when the rock is on the side of the wall, or the rover drives over the rock because it was unable to stop in time. Finally, I did not attempt to add in the necessary logic for the rover to return to the start to deliver the supplies.
