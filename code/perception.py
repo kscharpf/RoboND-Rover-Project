@@ -24,7 +24,7 @@ def color_thresh(img, low_thresh, high_thresh):
 def identify_ground_and_other(img, mask):
     ground = color_thresh(img, (160,160,160), (255,255,255))
     obstacles = np.absolute(np.float32(ground)-1)*mask
-    rock = color_thresh(img, (110,110,0), (255,255,50))
+    rock = color_thresh(img, (110,110,0), (255,255,60))
     return ground,obstacles,rock
 
 
@@ -154,6 +154,8 @@ def perception_step(Rover):
     dist, angles = to_polar_coords(xpix, ypix)
 
     Rover.nav_angles = angles
+
+    Rover.obs_dist, Rover.obs_angles = to_polar_coords(obsxpix, obsypix)
 
     if rocks_map.any():
         rock_x, rock_y = rover_coords(rocks_map)
