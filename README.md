@@ -7,6 +7,13 @@
 
 ![alt text][image_0] 
 
+## Directories
+"output" directory contains the various jpg images created as part of the jupyter notebook as well as png screenshots of the autonomous run and the test_mapping.mp4 video.
+
+"my_test_images" contains the original images used for testing in the jupyter notebook
+
+### Project
+
 This project is modeled after the [NASA sample return challenge](https://www.nasa.gov/directorates/spacetech/centennial_challenges/sample_return_robot/index.html) and it will give you first hand experience with the three essential elements of robotics, which are perception, decision making and actuation.  You will carry out this project in a simulator environment built with the Unity game engine.  
 
 ## The Simulator
